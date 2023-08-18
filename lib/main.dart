@@ -4,12 +4,13 @@ import 'package:foda/app.dart';
 import 'package:foda/core/settings/setting_controller.dart';
 import 'package:foda/core/settings/setting_service.dart';
 import 'package:foda/firebase_options.dart';
+import 'package:foda/services/get_it.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final settingsController = SettingsController(SettingsService());
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  // GetItService.initializeService();
+  GetItService.initializeService();
   await settingsController.loadSettings();
   runApp(FodaApp(
     settingsController: settingsController,
