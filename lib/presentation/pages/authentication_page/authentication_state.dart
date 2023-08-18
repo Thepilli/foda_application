@@ -22,46 +22,47 @@ class AuthenticationState extends BaseState {
 
   AuthenticationState() {
     if (currentUser == null) {
-      _userNofier();
+      _userNotifier();
     }
-    userRepo.currentUserNotifier.addListener(_userNofier);
+    userRepo.currentUserNotifier.addListener(_userNotifier);
   }
   @override
   void dispose() {
-    userRepo.currentUserNotifier.removeListener(_userNofier);
+    userRepo.currentUserNotifier.removeListener(_userNotifier);
     super.dispose();
   }
 
-  Future<void> registerUser() async {
+  void registerUser() async {
     final validate = formKey.currentState?.validate();
+
     if (validate != null && validate == true && isLoading == false) {
       final user = User(
-        uid: '',
-        email: emailController.text.trim(),
-        name: nameController.text.trim(),
-        phone: '',
-        profileImageUrl: '',
+        uid: "",
+        email: emailController.text,
+        phone: "",
+        profileImageUrl: "",
         createdAt: timeNow(),
         updatedAt: timeNow(),
         isActive: true,
         dob: 0,
         favorites: const [],
+        name: nameController.text.trim(),
       );
-      setLoading(true);
 
+      setLoading(true);
       final register = await userRepo.registerUser(user, passwordController.text.trim());
       setLoading(false);
 
       if (register.isRight) {
-        fodaPrint('Successfully registered a user');
-        Navigator.of(context).pushNamed(overviewPath);
+        fodaPrint("Successfully registered a user");
+        navigatorToHome();
       } else {
-        fodaPrint('${register.left} error');
+        fodaPrint("${register.left} error");
       }
     }
   }
 
-  Future<void> loginUser() async {
+  void loginUser() async {
     final validate = formKey.currentState?.validate();
 
     if (validate != null && validate == true && isLoading == false) {
@@ -71,15 +72,40 @@ class AuthenticationState extends BaseState {
       setLoading(false);
 
       if (register.isRight) {
-        fodaPrint('Successfully logged in the user');
-        Navigator.of(context).pushNamed(overviewPath);
+        fodaPrint("Successfully login a user");
+        navigatorToHome();
       } else {
-        fodaPrint('${register.left} error');
+        fodaPrint("${register.left} error");
       }
     }
   }
 
-  void _userNofier() {
+  googleSingin() async {
+    if (isLoading == false) {
+      setLoading(true);
+      notifyListeners();
+
+      final register = await userRepo.googleSignIn();
+      setLoading(false);
+      notifyListeners();
+
+      if (register.isRight) {
+        fodaPrint("Successfully sigin user");
+        navigatorToHome();
+      } else {
+        fodaPrint("${register.left} error");
+      }
+    }
+  }
+
+  void navigatorToHome() {
+    Navigator.of(context).pushNamedAndRemoveUntil(
+      overviewPath,
+      (route) => false,
+    );
+  }
+
+  void _userNotifier() {
     currentUser = userRepo.currentUserNotifier.value;
     notifyListeners();
   }

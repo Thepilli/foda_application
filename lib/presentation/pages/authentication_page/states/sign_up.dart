@@ -28,8 +28,9 @@ class SignUpView extends StatelessWidget {
           FodaButton(
             width: size.width * .7,
             gradientColors: const [AppColors.gradient1, AppColors.gradient2],
+            state: state.isLoading ? ButtonState.loading : ButtonState.idle,
             label: 'Sign up with  Google',
-            onTap: () {},
+            onTap: state.googleSingin,
             prefixIcon: const Icon(
               Icons.mail,
               color: AppColors.whiteColor,
