@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "626177959136",
+    "project_id": "foda-application",
+    "storage_bucket": "foda-application.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:626177959136:android:db2e4dee6f9153800b1c85",
+        "android_client_info": {
+          "package_name": "com.example.foda"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "626177959136-vucck4b050euvqtoq7ogkjcot4lm61qc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAneDSbsyXfFeXmdsE6jSRVhetzju_5deU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "626177959136-jvilh0m741pj3pg73f8lf448rq0da05n.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "626177959136-569hi7r3j58m3lapd81nsav1f25engjk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.foda"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
