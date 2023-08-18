@@ -3,8 +3,10 @@ import 'package:foda/core/components/foda_button.dart';
 import 'package:foda/core/components/foda_text_field.dart';
 import 'package:foda/core/components/j_box.dart';
 import 'package:foda/core/themes/app_theme.dart';
+import 'package:foda/presentation/pages/authentication_page/authentication_state.dart';
 import 'package:foda/presentation/pages/authentication_page/widgets/auth_header.dart';
 import 'package:foda/presentation/pages/authentication_page/widgets/suffix_icon_button.dart';
+import 'package:provider/provider.dart';
 
 class SignUpView extends StatelessWidget {
   const SignUpView({
@@ -16,6 +18,7 @@ class SignUpView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final state = context.watch<AuthenticationState>();
     return Center(
       child: Column(
         children: [
@@ -43,6 +46,7 @@ class SignUpView extends StatelessWidget {
           ),
           const JBox(height: AppTheme.elementSpacing / 2),
           FodaTextField(
+            controller: state.nameController,
             size: size,
             label: 'Username',
             suffixIcon: SuffixIconButton(
@@ -52,6 +56,7 @@ class SignUpView extends StatelessWidget {
           ),
           const JBox(height: AppTheme.elementSpacing / 2),
           FodaTextField(
+            controller: state.emailController,
             size: size,
             label: 'Email',
             suffixIcon: SuffixIconButton(
@@ -61,6 +66,7 @@ class SignUpView extends StatelessWidget {
           ),
           const JBox(height: AppTheme.elementSpacing / 2),
           FodaTextField(
+            controller: state.passwordController,
             size: size,
             label: 'Password',
             isObscured: true,
@@ -72,8 +78,9 @@ class SignUpView extends StatelessWidget {
           const JBox(height: AppTheme.elementSpacing / 2),
           FodaButton(
             width: size.width * .9,
+            state: state.isLoading ? ButtonState.loading : ButtonState.idle,
             label: 'Sign up',
-            onTap: () {},
+            onTap: state.registerUser,
             gradientColors: const [AppColors.gradient1, AppColors.gradient2],
           )
         ],

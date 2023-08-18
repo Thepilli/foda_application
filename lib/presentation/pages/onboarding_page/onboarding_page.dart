@@ -8,7 +8,6 @@ import 'package:foda/core/constants/image_path.dart';
 import 'package:foda/core/constants/route_path.dart';
 import 'package:foda/core/themes/app_theme.dart';
 import 'package:foda/presentation/pages/authentication_page/authentication_page.dart';
-import 'package:foda/services/autherntication_service.dart';
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key});
@@ -51,16 +50,16 @@ class OnboardingPage extends StatelessWidget {
                     width: size.width * .7,
                     label: 'Sign In',
                     onTap: () {
-                      AuthenticationService.instance.signUp('helloworld@gmail.com', '123123123').then((value) {
-                        if (value != null) {
-                          print(value.email);
-                        }
-                      });
+                      // AuthenticationService.instance.signUp('helloworld@gmail.com', '123123123').then((value) {
+                      //   if (value != null) {
+                      //     print(value.email);
+                      //   }
+                      // });
 
-                      // Navigator.of(context).pushNamed(
-                      //   authPath,
-                      //   arguments: AuthenticationViewState.signIn,
-                      // );
+                      Navigator.of(context).pushNamed(
+                        authPath,
+                        arguments: AuthenticationViewState.signIn,
+                      );
                     },
                   ),
                 ],

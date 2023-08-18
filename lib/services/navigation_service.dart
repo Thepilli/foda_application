@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foda/core/constants/route_path.dart';
 import 'package:foda/presentation/pages/authentication_page/authentication_page.dart';
 import 'package:foda/presentation/pages/onboarding_page/onboarding_page.dart';
+import 'package:foda/presentation/pages/overview_page/overview_page.dart';
 
 class NavigationService {
   NavigationService._();
@@ -21,17 +22,20 @@ class NavigationService {
         return navigateToMaterialPageRoute(settings, AuthenticationPage(viewState: state));
       case welcomePath:
         return navigateToMaterialPageRoute(settings, const OnboardingPage());
+      case overviewPath:
+        return navigateToMaterialPageRoute(settings, const OverviewPage());
     }
 
     return null;
   }
 
   PageRoute navigateToMaterialPageRoute(RouteSettings settings, Widget page,
-      {bool maintainState = true, bool fullscreenDialog = true}) {
+      {bool maintainState = true, bool fullscreenDialog = false, bool allowSnapshotting = true}) {
     return PageRouteBuilder(
       pageBuilder: (c, a1, a2) => page,
       maintainState: maintainState,
       fullscreenDialog: fullscreenDialog,
+      allowSnapshotting: allowSnapshotting,
       settings: settings,
       transitionsBuilder: (c, anim, a2, child) => FadeTransition(opacity: anim, child: child),
       transitionDuration: const Duration(milliseconds: 300),
