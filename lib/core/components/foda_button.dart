@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:foda/core/themes/app_theme.dart';
 
-enum ButtonState { idle, loading, diabled }
+enum ButtonState { idle, loading, disabled }
+
+enum CircleState { pressed, notPressed }
 
 class FodaButton extends StatefulWidget {
   final String label;
@@ -54,5 +56,48 @@ class _FodaButtonState extends State<FodaButton> {
                       )
                     ],
                   )));
+  }
+}
+
+class FodaCircleButton extends StatefulWidget {
+  final double height;
+
+  final VoidCallback onTap;
+
+  final Widget icon;
+  final Color? color;
+  final List<Color> gradientColors;
+  final CircleState? state;
+  const FodaCircleButton({
+    super.key,
+    required this.height,
+    required this.onTap,
+    this.color = AppColors.buttonColor,
+    this.gradientColors = const [],
+    this.state = CircleState.notPressed,
+    required this.icon,
+  });
+
+  @override
+  State<FodaCircleButton> createState() => _FodaCircleButtonState();
+}
+
+class _FodaCircleButtonState extends State<FodaCircleButton> {
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: widget.onTap,
+      child: Container(
+        padding: const EdgeInsets.all(5),
+        height: widget.height,
+        width: widget.height,
+        decoration: BoxDecoration(
+          gradient:
+              LinearGradient(colors: widget.gradientColors.length > 1 ? widget.gradientColors : [widget.color!, widget.color!]),
+          shape: BoxShape.circle,
+        ),
+        child: widget.icon,
+      ),
+    );
   }
 }

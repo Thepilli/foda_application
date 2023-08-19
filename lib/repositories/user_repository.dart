@@ -8,6 +8,7 @@ import 'package:either_dart/either.dart';
 import 'package:flutter/widgets.dart';
 import 'package:foda/core/utils/common.dart';
 import 'package:foda/core/utils/date_time.dart';
+import 'package:foda/models/food.dart';
 import 'package:foda/models/result.dart';
 import 'package:foda/models/user.dart';
 import 'package:foda/services/autherntication_service.dart';
@@ -21,6 +22,7 @@ class UserRepository {
   StreamSubscription<DocumentSnapshot<Map<String, dynamic>>>? _userStreamSubscriptions;
 
   StreamSubscription? _authStreamSubscription;
+  String? get currentUserUID => _authService.auth.currentUser?.uid;
 
   ///listen to user auth
   UserRepository() {
@@ -153,5 +155,21 @@ class UserRepository {
     } catch (e) {
       return Left(ErrorHandler(message: e.toString()));
     }
+  }
+
+  Future<Either<ErrorHandler, bool>> addFoodToFavorite(String uid, Food food, {bool isAdding = true}) async {
+    try {
+      await usersCollection.doc(uid).update({
+        'favorites': isAdding ? FieldValue.arrayUnion([food.id]) : FieldValue.arrayRemove([food.id])
+      });
+      return Right(isAdding);
+    } catch (e) {
+      return Left(ErrorHandler(message: e.toString()));
+    }
+  }
+
+  Future<void> logout() async {
+    setCurrentUser = null;
+    await _authService.logout();
   }
 }

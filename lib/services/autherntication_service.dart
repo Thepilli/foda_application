@@ -57,6 +57,14 @@ class AuthenticationService {
     return null;
   }
 
+  Future<void> logout() async {
+    try {
+      await auth.signOut();
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Future<User?> signUp(String email, String password) async {
     try {
       final UserCredential credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(

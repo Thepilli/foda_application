@@ -35,7 +35,7 @@ class AppTheme {
   static const double elementSpacing = cardPadding / .5;
   static const double bottomNavBarHeight = 64;
   static const double iconSize = cardPadding;
-  static const Duration animationDuration = Duration(milliseconds: 300);
+  static const Duration animationDuration = Duration(milliseconds: 400);
   static BorderRadius cardRadius = BorderRadius.circular(14);
 
   static const double buttonHeight = 70;
@@ -105,6 +105,8 @@ class AppTheme {
 
 class AppColors {
   static const scaffoldMiddle = Color(0xFF261C2D);
+  static const navBarColor = Color(0xFF261C2D);
+  static const buttonColor = Color(0xFF333060);
 
   const AppColors._();
 
@@ -128,6 +130,7 @@ class AppColors {
   static const txtDark = Color(0xFF121212);
   static const gradient1 = Color(0xFFFF6363);
   static const gradient2 = Color(0xFF1F1D3A);
+  static const gradient3 = Color(0xFFFF6D5B);
 
   static const red = Colors.red;
   static const blue = Colors.blue;

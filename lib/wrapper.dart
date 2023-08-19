@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:foda/core/constants/route_path.dart';
+import 'package:foda/core/components/app_nav_bar.dart';
+import 'package:foda/core/themes/app_theme.dart';
+import 'package:foda/services/get_it.dart';
 import 'package:foda/services/navigation_service.dart';
 
 class Wrapper extends StatelessWidget {
@@ -9,12 +11,25 @@ class Wrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const navigationService = NavigationService;
+    final navigationService = locate<NavigationService>();
     return Scaffold(
+      bottomNavigationBar: ValueListenableBuilder<bool>(
+        valueListenable: navigationService.showNavBar,
+        builder: (context, show, _) {
+          if (!show) return const SizedBox.shrink();
+          return Container(
+            padding: const EdgeInsets.only(top: AppTheme.elementSpacing),
+            color: AppColors.navBarColor,
+            child: AppBottomNavigationBar(navigationService: navigationService),
+          );
+        },
+      ),
       body: Navigator(
-          key: NavigationService.instance.navigatorKey,
-          onGenerateRoute: NavigationService.instance.onGeneratedRoute,
-          initialRoute: welcomePath),
+        key: navigationService.navigatorKey,
+        onGenerateRoute: navigationService.onGeneratedRoute,
+        observers: [TabNavigationObservers()],
+        initialRoute: navigationService.determineHomePath(),
+      ),
     );
   }
 }

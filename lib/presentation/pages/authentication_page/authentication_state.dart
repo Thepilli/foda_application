@@ -11,7 +11,7 @@ import 'package:foda/services/navigation_service.dart';
 class AuthenticationState extends BaseState {
   final userRepo = locate<UserRepository>();
   final formKey = GlobalKey<FormState>();
-  final navigationService = NavigationService.instance;
+  final navigationService = locate<NavigationService>();
 
   BuildContext get context => navigationService.navigatorKey.currentContext!;
   User? currentUser;
