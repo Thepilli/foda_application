@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foda/core/components/foda_button.dart';
+import 'package:foda/core/constants/route_path.dart';
 import 'package:foda/core/themes/app_theme.dart';
 import 'package:foda/models/food.dart';
 import 'package:foda/presentation/pages/overview_page/overview_state.dart';
@@ -24,22 +25,26 @@ class FoodCard extends StatelessWidget {
           /// !!!!
           clipBehavior: Clip.none,
           children: [
-            Container(
-              height: 300.h,
-              width: 300.w,
-              decoration: const BoxDecoration(
-                color: Colors.transparent,
-                shape: BoxShape.circle,
-                // boxShadow: [
-                //   BoxShadow(
-                //     color: AppColors.blackColor.withOpacity(.6),
-                //     spreadRadius: 20,
-                //     blurRadius: 20,
-                //     offset: const Offset(15, 5),
-                //   ),
-                // ],
+            InkWell(
+              // onTap: () {
+              //   Navigator.push(
+              //       context,
+              //       MaterialPageRoute(
+              //         builder: (context) => FoodDetailPage(food: food),
+              //       ));
+              // },
+              onTap: () {
+                Navigator.pushNamed(context, foodDetailPath, arguments: food);
+              },
+              child: Container(
+                height: 300.h,
+                width: 300.w,
+                decoration: const BoxDecoration(
+                  color: Colors.transparent,
+                  shape: BoxShape.circle,
+                ),
+                child: Image.network(food.imageUrl),
               ),
-              child: Image.network(food.imageUrl),
             ),
             Positioned(
               left: 0,
@@ -83,8 +88,7 @@ class FoodCard extends StatelessWidget {
                         style: Theme.of(context).textTheme.headlineSmall,
                       ),
                       const SizedBox(height: AppTheme.elementSpacing * 0.5),
-                      Text("\$ ${food.price}.00",
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(color: AppColors.orange))
+                      Text("\$ ${food.price}.00", style: Theme.of(context).textTheme.headlineMedium)
                     ],
                   ),
                 )),

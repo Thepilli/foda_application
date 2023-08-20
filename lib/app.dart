@@ -27,7 +27,11 @@ class FodaApp extends StatelessWidget {
               ChangeNotifierProvider(create: (context) => AuthenticationState()),
               ChangeNotifierProvider(create: (context) => OverviewState()),
               ChangeNotifierProvider(create: (context) => CartState()),
-              ChangeNotifierProvider(create: (context) => CheckoutState()),
+              ChangeNotifierProvider(create: (context) => CartState()),
+              ChangeNotifierProvider(
+                create: (_) => CheckoutState(),
+                lazy: true,
+              )
             ],
             child: MaterialApp(
               debugShowCheckedModeBanner: false,

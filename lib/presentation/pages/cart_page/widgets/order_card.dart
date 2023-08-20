@@ -10,10 +10,12 @@ import 'package:provider/provider.dart';
 class OrderCard extends StatelessWidget {
   final CartItem cartItem;
   final Food? food;
+  final bool showDetails;
   const OrderCard({
     super.key,
     required this.cartItem,
     required this.food,
+    this.showDetails = true,
   });
 
   @override
@@ -54,46 +56,46 @@ class OrderCard extends StatelessWidget {
                       gradientColors: const [AppColors.gradient1, AppColors.gradient3],
                     ),
                   ),
-                  Positioned(
-                    right: size.width / 2 - 110.w,
-                    top: 40,
-                    child: FodaCircleButton(
-                      height: 35,
-                      onTap: () {
-                        state.removeCartItem(food!);
-                      },
-                      icon: const Icon(
-                        Icons.remove,
-                        size: 15,
+                  if (showDetails)
+                    Positioned(
+                      right: size.width / 2 - 110.w,
+                      top: 40,
+                      child: FodaCircleButton(
+                        height: 35,
+                        onTap: () {
+                          state.removeCartItem(food!);
+                        },
+                        icon: const Icon(
+                          Icons.remove,
+                          size: 15,
+                        ),
+                        color: AppColors.buttonColor,
                       ),
-                      color: AppColors.buttonColor,
-                    ),
-                  )
+                    )
                 ],
               ),
             ),
-            Text('${food?.title}',
-                style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                      color: AppColors.txtLight.withOpacity(.6),
-                      fontSize: 20,
-                    )),
-            RichText(
-              text: TextSpan(
-                text: '\$${food?.price}.00 ', //food price
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: AppColors.orange,
-                      fontSize: 17,
-                    ),
-                children: <TextSpan>[
-                  TextSpan(
-                      text: 'x ${cartItem.quantity}', //food quantity
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.txtLight.withOpacity(.6),
-                            fontSize: 15,
-                          )),
-                ],
+            if (showDetails)
+              Text('${food?.title}',
+                  style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                        color: AppColors.txtLight.withOpacity(.6),
+                        fontSize: 20,
+                      )),
+            if (showDetails)
+              RichText(
+                text: TextSpan(
+                  text: '\$${food?.price}.00 ', //food price
+                  style: Theme.of(context).textTheme.headlineMedium,
+                  children: <TextSpan>[
+                    TextSpan(
+                        text: 'x ${cartItem.quantity}', //food quantity
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: AppColors.txtLight.withOpacity(.6),
+                              fontSize: 15,
+                            )),
+                  ],
+                ),
               ),
-            ),
           ],
         ),
       ),

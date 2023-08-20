@@ -3,7 +3,9 @@ import 'package:foda/core/components/app_scaffold.dart';
 import 'package:foda/core/constants/icon_path.dart';
 import 'package:foda/core/constants/image_path.dart';
 import 'package:foda/core/themes/app_theme.dart';
+import 'package:foda/models/cart_item.dart';
 import 'package:foda/models/food.dart';
+import 'package:foda/presentation/pages/checkout_page/checkout_state.dart';
 import 'package:foda/presentation/pages/home_page/widgets/food_card.dart';
 import 'package:foda/presentation/pages/overview_page/overview_state.dart';
 import 'package:provider/provider.dart';
@@ -38,12 +40,42 @@ class _HomePageState extends State<HomePage> {
 
     return AppScaffold(
       body: Column(children: [
-        AppBar(
-          leading: Image.asset(IconPath.menu),
-          elevation: 0,
-          title: Text(state.userRepository.currentUserUID!),
-          backgroundColor: Colors.transparent,
-          actions: [InkWell(onTap: () => state.openCartView(context), child: Image.asset(IconPath.bag))],
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: AppBar(
+            leading: Image.asset(IconPath.menu),
+            elevation: 0,
+            title: Text(state.userRepository.currentUserUID!),
+            backgroundColor: Colors.transparent,
+            actions: [
+              InkWell(
+                onTap: () => state.openCartView(context),
+                child: Builder(
+                  builder: (context) {
+                    final cartItems = context.select<CheckoutState, List<CartItem>>((value) => value.cart);
+                    return Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(color: AppColors.buttonColor, borderRadius: BorderRadius.circular(99)),
+                          child: Image.asset(IconPath.bag),
+                        ),
+                        if (cartItems.isNotEmpty) ...[
+                          Positioned(
+                              right: -2,
+                              child: Text(
+                                cartItems.length.toString(),
+                                style: Theme.of(context).textTheme.labelMedium,
+                              ))
+                        ]
+                      ],
+                    );
+                  },
+                ),
+              )
+            ],
+          ),
         ),
         Expanded(
             child: ValueListenableBuilder<List<Food>>(

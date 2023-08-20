@@ -31,7 +31,7 @@ class CartPage extends StatelessWidget {
             Text('Total', style: Theme.of(context).textTheme.displayLarge),
             Text(state.cart.length > 1 ? '${state.cart.length} items' : '${state.cart.length} item',
                 style: Theme.of(context).textTheme.displaySmall),
-            Text('\$${state.getTotalAmount.toDouble()}', style: Theme.of(context).textTheme.displayLarge),
+            Text('\$${state.getTotalAmount.toDouble()}', style: Theme.of(context).textTheme.headlineMedium),
           ],
         ),
         FodaButton(

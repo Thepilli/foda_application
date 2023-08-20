@@ -48,16 +48,17 @@ class AppTheme {
     displayLarge: appstyle(30, AppColors.orange, FontWeight.w400),
     displayMedium: appstyle(27, AppColors.txtLight, FontWeight.w400),
     displaySmall: appstyle(21, AppColors.txtLight, FontWeight.w600),
-    headlineMedium: appstyleNormal(20, AppColors.txtLight, FontWeight.w400),
+    headlineMedium: appstyleNormal(20, AppColors.orange, FontWeight.w400),
     headlineSmall: appstyleNormal(18, AppColors.txtLight, FontWeight.w600),
     titleLarge: appstyleNormal(17, AppColors.txtLight, FontWeight.w400),
     titleMedium: appstyleNormal(15, AppColors.txtLight, FontWeight.w500),
     titleSmall: appstyleNormal(11, AppColors.txtLight, FontWeight.w500),
     bodyLarge: appstyleNormal(13, AppColors.txtLight, FontWeight.w500),
-    bodyMedium: appstyleNormal(12, AppColors.txtLight, FontWeight.w500),
+    bodyMedium: appstyleNormal(12, AppColors.grey, FontWeight.w500),
     bodySmall: appstyleNormal(11, AppColors.txtLight, FontWeight.w400),
     labelLarge: appstyleNormal(18, AppColors.txtLight, FontWeight.w500),
-    labelSmall: appstyleNormal(8, AppColors.txtLight, FontWeight.w400),
+    labelMedium: appstyleNormal(13, AppColors.orange, FontWeight.w500),
+    labelSmall: appstyleNormal(10, AppColors.txtDark, FontWeight.w400),
   );
 
   static ThemeData theme = ThemeData(
@@ -70,7 +71,7 @@ class AppTheme {
       splashRadius: 24,
     ),
     iconTheme: const IconThemeData(color: AppColors.grey),
-    splashColor: AppColors.red.withOpacity(.4),
+    splashColor: AppColors.navBarColor,
     inputDecorationTheme: InputDecorationTheme(
       fillColor: AppColors.blackColor,
       filled: true,

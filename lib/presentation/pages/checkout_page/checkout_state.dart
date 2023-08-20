@@ -48,17 +48,19 @@ class CheckoutState extends BaseState {
   }
 
   void _cartListener() async {
-    cart = _cartRepository.cartNotifier.value;
+    cart = [..._cartRepository.cartNotifier.value];
     notifyListeners();
 
-    _cartRepository.cartNotifier.value.forEach((CartItem item) async {
-      final getFood = await foodRepository.getFood(item.foodId);
-      if (getFood.isRight) {
-        final product = getFood.right;
-        cartItems[item.foodId] = product;
-        notifyListeners();
-      }
-    });
+    _cartRepository.cartNotifier.value.forEach(
+      ((CartItem item) async {
+        final getFood = await foodRepository.getFood(item.foodId);
+        if (getFood.isRight) {
+          final product = getFood.right;
+          cartItems[item.foodId] = product;
+          notifyListeners();
+        }
+      }),
+    );
   }
 
   void onPageChange(int value) {

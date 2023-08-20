@@ -2,14 +2,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:foda/core/constants/route_path.dart';
+import 'package:foda/models/food.dart';
 import 'package:foda/presentation/pages/authentication_page/authentication_page.dart';
 import 'package:foda/presentation/pages/cart_page/cart_page.dart';
 import 'package:foda/presentation/pages/checkout_page/checkout_page.dart';
+import 'package:foda/presentation/pages/food_detail_page/food_detail_page.dart';
 import 'package:foda/presentation/pages/onboarding_page/onboarding_page.dart';
 import 'package:foda/presentation/pages/overview_page/overview_page.dart';
 import 'package:foda/repositories/user_repository.dart';
+import 'package:foda/services/get_it.dart';
 
-import 'get_it.dart';
+enum NavBarType { tabNavigator, cart }
 
 class NavigationService {
   GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -17,14 +20,18 @@ class NavigationService {
 
   ValueNotifier<int> currentIndexNotifier = ValueNotifier<int>(0);
   ValueNotifier<bool> showNavBar = ValueNotifier<bool>(false);
+  ValueNotifier<NavBarType> showNavBarType = ValueNotifier<NavBarType>(NavBarType.tabNavigator);
 
   List<String> pathToCloseNavBar = [
     authPath,
     welcomePath,
+    cartPath,
   ];
 
-  void setNavBar(bool value) {
+  void setNavBar(bool value, [NavBarType navBarType = NavBarType.tabNavigator]) {
     showNavBar.value = value;
+    showNavBarType.value = navBarType;
+
     showNavBar.notifyListeners();
   }
 
@@ -55,6 +62,14 @@ class NavigationService {
         return navigateToMaterialPageRoute(settings, const CartPage());
       case checkoutPath:
         return navigateToMaterialPageRoute(settings, const CheckoutPage());
+      case foodDetailPath:
+        final food = settings.arguments as Food?;
+
+        return navigateToMaterialPageRoute(
+            settings,
+            FoodDetailViewWidget(
+              food: food!,
+            ));
     }
 
     return null;
@@ -69,19 +84,9 @@ class NavigationService {
       allowSnapshotting: allowSnapshotting,
       settings: settings,
       transitionsBuilder: (c, anim, a2, child) => FadeTransition(opacity: anim, child: child),
-      transitionDuration: const Duration(milliseconds: 300),
+      transitionDuration: const Duration(milliseconds: 500),
     );
   }
-
-  // MaterialPageRoute _navigateToModelPageRoute(RouteSettings settings, Widget child,
-  //     {bool maintainState = true, bool fullscreenDialog = false}) {
-  //   return MaterialWithModalsPageRoute(
-  //     settings: settings,
-  //     maintainState: maintainState,
-  //     fullscreenDialog: fullscreenDialog,
-  //     builder: (_) => child,
-  //   );
-  // }
 }
 
 class TabNavigationObservers extends RouteObserver<PageRoute<dynamic>> {
@@ -112,7 +117,7 @@ class TabNavigationObservers extends RouteObserver<PageRoute<dynamic>> {
     if (containRoutePath) {
       navigationService.setNavBar(false);
     } else {
-      navigationService.setNavBar(true);
+      navigationService.setNavBar(true, route.settings.name == foodDetailPath ? NavBarType.cart : NavBarType.tabNavigator);
     }
 
     super.didPush(route, previousRoute);

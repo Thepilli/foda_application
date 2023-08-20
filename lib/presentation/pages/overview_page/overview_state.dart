@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foda/core/components/base_state.dart';
 import 'package:foda/core/themes/app_theme.dart';
+import 'package:foda/core/utils/custom_toast.dart';
 import 'package:foda/models/food.dart';
 import 'package:foda/presentation/pages/checkout_page/checkout_page.dart';
 import 'package:foda/repositories/cart_repository.dart';
@@ -33,12 +34,23 @@ class OverviewState extends BaseState {
     animateToPage(navigationService.currentIndexNotifier.value);
   }
 
-  void addToCart(Food food) {
-    cartRepository.addOrRemoveFoodFromCart(userRepository.currentUserUID!, food);
+  void addToCart(Food food, [bool isAdding = true]) async {
+    await cartRepository.addOrRemoveFoodFromCart(userRepository.currentUserUID!, food, isAdding: isAdding);
+    if (isAdding) {
+      showCustomToast("Added 1qty ${food.title} to cart");
+    } else {
+      showCustomToast("Removed 1qty ${food.title} from cart");
+    }
   }
 
   void addToFavorite(Food food) {
     userRepository.addFoodToFavorite(userRepository.currentUserUID!, food);
+    showCustomToast("Added ${food.title} to favorite");
+  }
+
+  void removCartItem(Food food) {
+    cartRepository.removeFoodFromCart(userRepository.currentUserUID!, food);
+    showCustomToast("Removed ${food.title} from cart");
   }
 
   Future<void> openCartView(BuildContext context) async {

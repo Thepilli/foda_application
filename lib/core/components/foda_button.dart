@@ -8,6 +8,7 @@ enum CircleState { pressed, notPressed }
 class FodaButton extends StatefulWidget {
   final String label;
   final double? width;
+  final double? height;
   final TextStyle? labelStyle;
   final ButtonState state;
   final Widget? prefixIcon;
@@ -24,6 +25,7 @@ class FodaButton extends StatefulWidget {
     required this.onTap,
     this.color = Colors.transparent,
     this.width = 200,
+    this.height = AppTheme.buttonHeight,
   });
 
   @override
@@ -37,7 +39,7 @@ class _FodaButtonState extends State<FodaButton> {
         onTap: widget.onTap,
         child: Container(
             width: widget.width,
-            height: AppTheme.buttonHeight,
+            height: widget.height,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(AppTheme.fullyRounded),
               gradient: LinearGradient(
@@ -49,7 +51,7 @@ class _FodaButtonState extends State<FodaButton> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       widget.prefixIcon == null ? Container() : widget.prefixIcon!,
-                      const SizedBox(width: 10),
+                      widget.prefixIcon == null ? Container() : const SizedBox(width: 10),
                       Text(
                         widget.label,
                         style: widget.labelStyle ?? Theme.of(context).textTheme.labelLarge,
