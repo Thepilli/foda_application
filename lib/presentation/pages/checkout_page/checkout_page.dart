@@ -3,6 +3,8 @@ import 'package:foda/core/components/app_scaffold.dart';
 import 'package:foda/core/themes/app_theme.dart';
 import 'package:foda/presentation/pages/cart_page/cart_page.dart';
 import 'package:foda/presentation/pages/checkout_page/checkout_state.dart';
+import 'package:foda/presentation/pages/checkout_page/confirmation_order_page.dart';
+import 'package:foda/presentation/pages/checkout_page/widgets/completed_order_page.dart';
 import 'package:provider/provider.dart';
 
 class CheckoutPage extends StatelessWidget {
@@ -26,18 +28,10 @@ class CheckoutPage extends StatelessWidget {
             controller: state.pageController,
             onPageChanged: state.onPageChange,
             // physics: const NeverScrollableScrollPhysics(),
-            children: [
-              const CartPage(),
-              Container(
-                child: const Center(
-                  child: Text('confirm'),
-                ),
-              ),
-              Container(
-                child: const Center(
-                  child: Text('FINISH'),
-                ),
-              ),
+            children: const [
+              CartPage(),
+              ConfirmationOrderPage(),
+              CompeltedOrderPage(),
             ]),
       ),
     ]));

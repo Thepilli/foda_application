@@ -14,20 +14,31 @@ class AccountPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userRepository = locate<UserRepository>();
+
     return AppScaffold(
         body: Center(
-      child: FodaButton(
-        label: 'Logout',
-        width: AppTheme.size(context).width * .8,
-        gradientColors: const [AppColors.gradient1, AppColors.gradient2],
-        onTap: () async {
-          await locate<UserRepository>().logout();
-          Navigator.of(context).pushNamedAndRemoveUntil(
-            authPath,
-            (route) => false,
-            arguments: AuthenticationViewState.signIn,
-          );
-        },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            userRepository.currentUserNotifier.value!.email,
+          ),
+          FodaButton(
+            label: 'Logout',
+            width: AppTheme.size(context).width * .8,
+            gradientColors: const [AppColors.gradient1, AppColors.gradient2],
+            onTap: () async {
+              await locate<UserRepository>().logout();
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                authPath,
+                (route) => false,
+                arguments: AuthenticationViewState.signIn,
+              );
+            },
+          ),
+        ],
       ),
     ));
   }

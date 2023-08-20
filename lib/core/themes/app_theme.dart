@@ -67,7 +67,7 @@ class AppTheme {
     hintColor: AppColors.whiteColor,
     indicatorColor: AppColors.red,
     radioTheme: RadioThemeData(
-      fillColor: MaterialStateProperty.all(AppColors.purple),
+      fillColor: MaterialStateProperty.all(AppColors.orange),
       splashRadius: 24,
     ),
     iconTheme: const IconThemeData(color: AppColors.grey),

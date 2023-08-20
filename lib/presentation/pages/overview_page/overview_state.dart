@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foda/core/components/base_state.dart';
 import 'package:foda/core/themes/app_theme.dart';
 import 'package:foda/core/utils/custom_toast.dart';
@@ -59,7 +58,7 @@ class OverviewState extends BaseState {
       enableDrag: true,
       useRootNavigator: true,
       elevation: 10,
-      builder: (_) => SizedBox(height: MediaQuery.of(context).size.height * 0.90.h, child: const CheckoutPage()),
+      builder: (_) => SizedBox(height: MediaQuery.of(context).size.height * 0.90, child: const CheckoutPage()),
     );
   }
 }
