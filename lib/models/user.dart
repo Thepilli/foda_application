@@ -14,6 +14,8 @@ class User extends Equatable {
   final int updatedAt;
   final bool isActive;
   final int dob;
+  final List<String> permisions;
+
   final List<String> favorites;
 
   const User({
@@ -26,6 +28,7 @@ class User extends Equatable {
     required this.updatedAt,
     required this.isActive,
     required this.dob,
+    required this.permisions,
     required this.favorites,
   });
 
@@ -41,6 +44,7 @@ class User extends Equatable {
       updatedAt,
       isActive,
       dob,
+      permisions,
       favorites,
     ];
   }
@@ -55,6 +59,7 @@ class User extends Equatable {
     int? updatedAt,
     bool? isActive,
     int? dob,
+    List<String>? permisions,
     List<String>? favorites,
   }) {
     return User(
@@ -67,6 +72,7 @@ class User extends Equatable {
       updatedAt: updatedAt ?? this.updatedAt,
       isActive: isActive ?? this.isActive,
       dob: dob ?? this.dob,
+      permisions: permisions ?? this.permisions,
       favorites: favorites ?? this.favorites,
     );
   }
@@ -82,6 +88,7 @@ class User extends Equatable {
       'updatedAt': updatedAt,
       'isActive': isActive,
       'dob': dob,
+      'permisions': permisions,
       'favorites': favorites,
     };
   }
@@ -97,6 +104,7 @@ class User extends Equatable {
       updatedAt: map['updatedAt'] ?? 0,
       isActive: map['isActive'] ?? false,
       dob: map['dob'] ?? 0,
+      permisions: List<String>.from(map['permisions'] ?? []),
       favorites: List<String>.from(map['favorites'] ?? []),
     );
   }
@@ -107,6 +115,6 @@ class User extends Equatable {
 
   @override
   String toString() {
-    return 'User(uid: $uid, email: $email, name: $name, phone: $phone, profileImageUrl: $profileImageUrl, createdAt: $createdAt, updatedAt: $updatedAt, isActive: $isActive, dob: $dob, favorites: $favorites)';
+    return 'User(uid: $uid, email: $email, name: $name, phone: $phone, profileImageUrl: $profileImageUrl, createdAt: $createdAt, updatedAt: $updatedAt, isActive: $isActive, dob: $dob, permisions: $permisions, favorites: $favorites)';
   }
 }

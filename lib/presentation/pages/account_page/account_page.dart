@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/widgets.dart';
 import 'package:foda/core/components/app_scaffold.dart';
 import 'package:foda/core/components/foda_button.dart';

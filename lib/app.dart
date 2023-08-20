@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foda/core/settings/setting_controller.dart';
 import 'package:foda/core/themes/app_theme.dart';
 import 'package:foda/presentation/pages/authentication_page/authentication_state.dart';
+import 'package:foda/presentation/pages/cart_page/cart_state.dart';
+import 'package:foda/presentation/pages/checkout_page/checkout_state.dart';
 import 'package:foda/presentation/pages/overview_page/overview_state.dart';
 import 'package:foda/wrapper.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +26,8 @@ class FodaApp extends StatelessWidget {
             providers: [
               ChangeNotifierProvider(create: (context) => AuthenticationState()),
               ChangeNotifierProvider(create: (context) => OverviewState()),
+              ChangeNotifierProvider(create: (context) => CartState()),
+              ChangeNotifierProvider(create: (context) => CheckoutState()),
             ],
             child: MaterialApp(
               debugShowCheckedModeBanner: false,

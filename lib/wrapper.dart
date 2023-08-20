@@ -18,7 +18,7 @@ class Wrapper extends StatelessWidget {
         builder: (context, show, _) {
           if (!show) return const SizedBox.shrink();
           return Container(
-            padding: const EdgeInsets.only(top: AppTheme.elementSpacing),
+            padding: const EdgeInsets.only(top: AppTheme.elementSpacing / 3),
             color: AppColors.navBarColor,
             child: AppBottomNavigationBar(navigationService: navigationService),
           );

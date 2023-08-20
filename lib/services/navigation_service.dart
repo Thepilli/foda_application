@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:foda/core/constants/route_path.dart';
 import 'package:foda/presentation/pages/authentication_page/authentication_page.dart';
+import 'package:foda/presentation/pages/cart_page/cart_page.dart';
+import 'package:foda/presentation/pages/checkout_page/checkout_page.dart';
 import 'package:foda/presentation/pages/onboarding_page/onboarding_page.dart';
 import 'package:foda/presentation/pages/overview_page/overview_page.dart';
 import 'package:foda/repositories/user_repository.dart';
@@ -49,6 +51,10 @@ class NavigationService {
         return navigateToMaterialPageRoute(settings, const OnboardingPage());
       case overviewPath:
         return navigateToMaterialPageRoute(settings, const OverviewPage());
+      case cartPath:
+        return navigateToMaterialPageRoute(settings, const CartPage());
+      case checkoutPath:
+        return navigateToMaterialPageRoute(settings, const CheckoutPage());
     }
 
     return null;

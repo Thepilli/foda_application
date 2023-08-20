@@ -23,27 +23,40 @@ class AppBottomNavigationBar extends StatelessWidget {
             },
             items: [
               BottomNavigationBarItem(
-                icon: Image.asset(IconPath.home),
-                activeIcon: Image.asset(IconPath.home, color: AppColors.orange),
+                icon: Image.asset(
+                  IconPath.home,
+                  height: 12,
+                ),
+                activeIcon: Image.asset(IconPath.home, height: 20, color: AppColors.orange),
                 label: "",
               ),
               BottomNavigationBarItem(
-                icon: Image.asset(IconPath.favourite),
-                activeIcon: Image.asset(IconPath.favourite, color: AppColors.orange),
+                icon: Image.asset(
+                  IconPath.favourite,
+                  height: 12,
+                ),
+                activeIcon: Image.asset(IconPath.favourite, height: 20, color: AppColors.orange),
                 label: "",
               ),
               BottomNavigationBarItem(
-                icon: Image.asset(IconPath.search),
-                activeIcon: Image.asset(IconPath.search, color: AppColors.orange),
+                icon: Image.asset(
+                  IconPath.search,
+                  height: 12,
+                ),
+                activeIcon: Image.asset(IconPath.search, height: 20, color: AppColors.orange),
                 label: "",
               ),
               BottomNavigationBarItem(
-                icon: Image.asset(IconPath.account),
-                activeIcon: Image.asset(IconPath.account, color: AppColors.orange),
+                icon: Image.asset(
+                  IconPath.account,
+                  height: 12,
+                ),
+                activeIcon: Image.asset(IconPath.account, height: 20, color: AppColors.orange),
                 label: "",
               ),
             ],
             elevation: 0,
+            // iconSize: 20,
             selectedFontSize: 11,
             unselectedFontSize: 11,
             type: BottomNavigationBarType.fixed,

@@ -96,7 +96,7 @@ class _FodaCircleButtonState extends State<FodaCircleButton> {
               LinearGradient(colors: widget.gradientColors.length > 1 ? widget.gradientColors : [widget.color!, widget.color!]),
           shape: BoxShape.circle,
         ),
-        child: widget.icon,
+        child: Center(child: widget.icon),
       ),
     );
   }

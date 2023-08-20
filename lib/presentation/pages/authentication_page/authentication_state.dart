@@ -45,6 +45,7 @@ class AuthenticationState extends BaseState {
         updatedAt: timeNow(),
         isActive: true,
         dob: 0,
+        permisions: const [],
         favorites: const [],
         name: nameController.text.trim(),
       );

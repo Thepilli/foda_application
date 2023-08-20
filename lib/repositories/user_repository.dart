@@ -23,6 +23,7 @@ class UserRepository {
 
   StreamSubscription? _authStreamSubscription;
   String? get currentUserUID => _authService.auth.currentUser?.uid;
+  String? get currentUserDisplayName => _authService.auth.currentUser?.displayName;
 
   ///listen to user auth
   UserRepository() {
@@ -34,6 +35,7 @@ class UserRepository {
     _authStreamSubscription = _authService.authStates().listen((firebaseUser) {
       if (firebaseUser != null) {
         final String uid = firebaseUser.uid;
+        // final String email = firebaseUser.displayName;
         getCurrentUser(uid);
         fodaPrint('CURRENT USER >>> $uid');
       } else {
@@ -101,7 +103,6 @@ class UserRepository {
     }
   }
 
-  ///listen to user
   Stream<User?> listenToCurrentUser(String uid) async* {
     try {
       final snapshots = usersCollection.doc(uid).snapshots();
@@ -136,6 +137,7 @@ class UserRepository {
           updatedAt: timeNow(),
           isActive: true,
           dob: 0,
+          permisions: const [],
           favorites: const [],
           name: firebaseUser.displayName ?? "",
         );

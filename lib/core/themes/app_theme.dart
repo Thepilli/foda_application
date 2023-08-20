@@ -130,7 +130,8 @@ class AppColors {
   static const txtDark = Color(0xFF121212);
   static const gradient1 = Color(0xFFFF6363);
   static const gradient2 = Color(0xFF1F1D3A);
-  static const gradient3 = Color(0xFFFF6D5B);
+  static const gradient3 = Color(0xFFE7A864);
+  static const gradient4 = Color(0xFFFF6D5B);
 
   static const red = Colors.red;
   static const blue = Colors.blue;
