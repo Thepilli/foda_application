@@ -18,4 +18,5 @@ class ImagePath {
   static const String tamales = 'assets/images/tamales.png';
   static const String tostadas = 'assets/images/tostadas.png';
   static const String basket = 'assets/images/basket.png';
+  static const String bg = 'assets/images/bg.png';
 }

@@ -25,7 +25,7 @@ class OnboardingPage extends StatelessWidget {
             Center(
               child: Column(
                 children: [
-                  Image.asset(ImagePath.discuss, height: size.height * .5),
+                  Image.asset(ImagePath.bg, height: size.height * .45),
                   const JBox(height: AppTheme.elementSpacing),
                   Image.asset(ImagePath.logo),
                   SizedBox(
