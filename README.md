@@ -46,3 +46,4 @@ I encourage users to provide feedback, report issues, or share suggestions for i
 The MexiEats Application is released under the MIT License. Refer to the LICENSE file in the repository for more information.
 
 ## Demo
+![J6TiQ6iksYUm_2048_1000](https://github.com/Thepilli/foda_application/assets/104307512/70f79245-c313-4072-8175-a62d7a55f624)
